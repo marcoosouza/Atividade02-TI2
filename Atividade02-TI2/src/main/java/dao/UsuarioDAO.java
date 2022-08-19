@@ -17,7 +17,37 @@ public class UsuarioDAO extends DAO {
 		close();
 	}
 	
+	public int getNextId() {
+		int nextId = -1;
+		try {
+			Statement st = conexao.createStatement();
+			String sql = "SELECT codigo FROM usuario WHERE codigo = (SELECT MAX(codigo) FROM usuario)";
+			ResultSet resultObj = st.executeQuery(sql);
+			resultObj.next();
+			int resultStr = Integer.parseInt(resultObj.getString("codigo"));
+			nextId = ++resultStr;
+		}
+		catch(SQLException u) {
+			System.out.println(u);
+		}
+		return nextId;
+	}
 	
+	public int getIdByName(String login) {
+		int idResult = -1;
+		try {
+			Statement st = conexao.createStatement();
+			String sql = "SELECT codigo FROM usuario WHERE login = '"+login+"'";
+			ResultSet resultObj = st.executeQuery(sql);
+			resultObj.next();
+			idResult = Integer.parseInt(resultObj.getString("codigo"));
+		}
+		catch(SQLException u) {
+			System.out.println(u);
+		}
+		
+		return idResult; 
+	}
 	public boolean insert(Usuario usuario) {
 		boolean status = false;
 		try {  
@@ -164,4 +194,9 @@ public class UsuarioDAO extends DAO {
 		}
 		return resp;
 	}	
+	
+	public static void main(String[] args) {
+		UsuarioDAO t = new UsuarioDAO();
+		System.out.println(t.getIdByName("tulio"));
+	}
 }

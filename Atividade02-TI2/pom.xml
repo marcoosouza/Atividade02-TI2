@@ -5,10 +5,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <description>Atividade02-TI2</description>
   <dependencies>
-  <dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>42.2.8</version>
+ <dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <version>42.4.2</version>
 </dependency>
 </dependencies>
 </project>
